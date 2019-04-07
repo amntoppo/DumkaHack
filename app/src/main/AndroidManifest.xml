@@ -37,6 +37,10 @@
             android:name=".faceActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".QRScan"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
