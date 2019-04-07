@@ -95,10 +95,14 @@ public class MainActivity extends AppCompatActivity {
                 String uid = parser.getAttributeValue(null, "uid");
                 String name = parser.getAttributeValue(null, "name");
                 String pincode = parser.getAttributeValue(null, "pc");
+                String gender = parser.getAttributeValue(null, "gender");
+                String dist = parser.getAttributeValue(null, "dist");
                 User user = User.newUser()
                         .setUid(uid)
                         .setName(name)
                         .setPincode(pincode)
+                        .setGender(gender)
+                        .setDist(dist)
                         .create();
                 Log.e("scan", "user created");
                 Toast.makeText(getApplicationContext(), user.getName(), Toast.LENGTH_LONG).show();

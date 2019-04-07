@@ -6,6 +6,9 @@ public class User implements Serializable {
     private String mName;
     private String mUid;
     private String mPincode;
+    private String gender;
+    private String dist;
+
     private long mBalance;
 
     private User() {}
@@ -54,6 +57,16 @@ public class User implements Serializable {
 
         public Builder setPincode(final String pincode) {
             mUser.mPincode = pincode;
+            return this;
+        }
+
+        public Builder setGender(final String gender) {
+            mUser.gender = gender;
+            return this;
+        }
+
+        public Builder setDist(final String dist) {
+            mUser.dist = dist;
             return this;
         }
 
