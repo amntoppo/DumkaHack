@@ -2,7 +2,6 @@ package com.hack.dumkahackathon;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
@@ -40,15 +39,14 @@ public class QRScan extends Activity {
         if (resultCode == RESULT_CANCELED) {
             return;
         }
-        Log.e("scan", "result given");
+        //Log.e("scan", "result given");
         final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
             XmlPullParser parser = null;
             InputStream stream = null;
             try {
-                Log.e("scan", "parser tried");
+                //Log.e("scan", "parser tried");
                 parser = Xml.newPullParser();
-                //stream = new ByteArrayInputStream(scanResult.getContents().getBytes("UTF-8"));
                 stream = new ByteArrayInputStream(scanResult.getContents().getBytes("UTF-8"));
 
                 parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -58,23 +56,19 @@ public class QRScan extends Activity {
                     mIntentIntegrator.initiateScan();
                     return;
                 }
-                Log.e("scan", "parsed");
+                //Log.e("scan", "parsed");
                 String uid = parser.getAttributeValue(null, "uid");
                 String name = parser.getAttributeValue(null, "name");
                 String pincode = parser.getAttributeValue(null, "pc");
                 String gender = parser.getAttributeValue(null, "gender");
                 String dist = parser.getAttributeValue(null, "dist");
+
+                //session maangement
                 session = new SessionManager(getApplicationContext());
                 session.createLoginSession(name, uid, pincode, dist, gender);
                 Log.e("scan", "user created");
-//                Intent faceIntent = new Intent(this, faceActivity.class);
-//
-//                SharedPreferences settings = getSharedPreferences(PREFS, 0); // 0 - for private mode
-//                SharedPreferences.Editor editor = settings.edit();
-//                editor.putBoolean("hasLoggedIn", true);
-//                editor.commit();
-//                startActivity(faceIntent);
-                //finish();
+
+                //open Main Activity
                 Intent mainIntent = new Intent(this, MainActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
